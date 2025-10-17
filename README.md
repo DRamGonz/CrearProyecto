@@ -326,6 +326,135 @@ Una vez completados todos estos pasos, tendrás la base funcional para tu API de
 
 ```
 
+
+---
+
+### 🧱 **Modelos y migraciones**
+
+Crea un **modelo con su migración asociada**:
+
+```bash
+php artisan make:model NombreDelModelo -m
+```
+
+🔹 Ejemplo:
+
+```bash
+php artisan make:model Producto -m
+```
+
+Esto crea:
+
+* `app/Models/Producto.php`
+* `database/migrations/xxxx_xx_xx_create_productos_table.php`
+
+---
+
+### 📂 **Migraciones**
+
+Solo la migración:
+
+```bash
+php artisan make:migration create_nombre_table
+```
+
+🔹 Ejemplo:
+
+```bash
+php artisan make:migration create_productos_table
+```
+
+Aplicar migraciones:
+
+```bash
+php artisan migrate
+```
+
+Revertir la última migración:
+
+```bash
+php artisan migrate:rollback
+```
+
+Reiniciar todas las migraciones:
+
+```bash
+php artisan migrate:refresh
+```
+
+---
+
+### 🧠 **Controladores**
+
+Controlador vacío:
+
+```bash
+php artisan make:controller NombreController
+```
+
+Controlador tipo **resource** (ideal para APIs REST):
+
+```bash
+php artisan make:controller NombreController --resource
+```
+
+Controlador tipo **API Resource** (sin vistas `create` y `edit`):
+
+```bash
+php artisan make:controller NombreController --api
+```
+
+🔹 Ejemplo:
+
+```bash
+php artisan make:controller ProductoController --api
+```
+
+---
+
+### 🧮 **Seeder y Factory**
+
+Para poblar la base de datos con datos de prueba:
+
+Seeder:
+
+```bash
+php artisan make:seeder NombreSeeder
+```
+
+Factory:
+
+```bash
+php artisan make:factory NombreFactory --model=NombreDelModelo
+```
+
+Ejemplo:
+
+```bash
+php artisan make:factory ProductoFactory --model=Producto
+```
+
+---
+
+### ⚙️ **Ejemplo típico de flujo para una API REST**
+
+```bash
+php artisan make:model Producto -m
+php artisan make:controller Api/ProductoController --api --model=Producto
+php artisan migrate
+```
+
+Esto te deja listo para definir tus rutas en `routes/api.php`:
+
+```php
+Route::apiResource('productos', App\Http\Controllers\Api\ProductoController::class);
+```
+
+---
+
+¿Quieres que te deje un **ejemplo completo** de cómo estructurar un endpoint REST (modelo + migración + controlador + rutas) para una entidad como `Producto`?
+
+
 ---
 
 ¿Quieres que te genere este archivo como un `.md` descargable (por ejemplo `README.md`) listo para usar en tu proyecto?
